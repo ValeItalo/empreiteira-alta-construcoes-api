@@ -31,4 +31,11 @@ public class ContactController {
         }
     }
 
+    @GetMapping("/contact")
+    public ResponseEntity<String> getContact() {
+        System.out.println("API OK");
+
+        return ResponseEntity.status(HttpStatus.OK).body("API Funcionando!");
+
+        }
 }
