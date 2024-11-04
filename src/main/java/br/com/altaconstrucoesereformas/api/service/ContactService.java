@@ -16,6 +16,7 @@ public class ContactService {
 
     public void sendEmail(Contact contactEmail) {
         var message = new SimpleMailMessage();
+        message.setText(contactEmail.body());
         message.setFrom("noreply@altaconstrucoes.com");
         message.setTo(contactEmail.to());
         message.setSubject(contactEmail.subject());
