@@ -32,10 +32,17 @@ public class ContactController {
     }
 
     @GetMapping("/contact")
-    public ResponseEntity<String> getContact() {
+    public ResponseEntity<String> getContact(@RequestBody Contact contato) {
         System.out.println("API OK");
 
-        return ResponseEntity.status(HttpStatus.OK).body("API Funcionando!");
+        try {
+            contactService.sendEmail(contato);
+            return ResponseEntity.status(HttpStatus.OK).body("Mensagem enviada com sucesso!");
+        } catch (Exception e) {
+            System.err.println("Erro ao enviar o email: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro ao enviar a mensagem. Tente novamente mais tarde.");
+        }
 
         }
 }
